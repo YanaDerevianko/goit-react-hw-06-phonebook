@@ -10,16 +10,23 @@ export const ContactList = ({ onDeleteContact }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const contacts = localStorage.getItem("contacts");
-    const parsedContacts = JSON.parse(contacts);
-    if (parsedContacts.length > 0) {
-      dispatch(contactsActions.addContact(parsedContacts));
-    }
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
+
+  useEffect(() => {
+    const contacts = localStorage.getItem("contacts");
+    const parsedContacts = JSON.parse(contacts);
+    console.log(parsedContacts);
+
+    if (parsedContacts.length) {
+      for (let i = 0; i < parsedContacts.length; i++) {
+        const name = parsedContacts[i].name;
+        console.log(name)
+        const number = parsedContacts[i].number;
+        dispatch(contactsActions.addContact({ name, number }));
+      }
+    }
+  }, []);
 
   return (
     <ContactsList>

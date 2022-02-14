@@ -21,7 +21,6 @@ export function App() {
   };
 
   const visibleContacts = getVisibleContacts();
-  console.log(visibleContacts);
 
   const deleteContact = (id) => dispatch(contactsActions.deleteContact(id));
 
